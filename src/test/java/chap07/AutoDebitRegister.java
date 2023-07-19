@@ -5,9 +5,9 @@ import java.time.LocalDateTime;
 public class AutoDebitRegister {
 
     private final CardNumberValidator validator;
-    private final JpaAutoDebitInfoRepository repository;
+    private final AutoDebitInfoRepository repository;
 
-    public AutoDebitRegister(CardNumberValidator validator, JpaAutoDebitInfoRepository repository) {
+    public AutoDebitRegister(CardNumberValidator validator, AutoDebitInfoRepository repository) {
         this.validator = validator;
         this.repository = repository;
     }

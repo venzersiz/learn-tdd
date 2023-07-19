@@ -4,11 +4,25 @@ import java.time.LocalDateTime;
 
 public class AutoDebitInfo {
 
-    public AutoDebitInfo(String userId, String cardNumber, LocalDateTime dateTime) {
+    private String userId;
+    private String cardNumber;
+    private LocalDateTime dateTime;
 
+    public AutoDebitInfo(String userId, String cardNumber, LocalDateTime dateTime) {
+        this.userId = userId;
+        this.cardNumber = cardNumber;
+        this.dateTime = dateTime;
     }
 
     public void changeCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public String getCardNumber() {
+        return cardNumber;
     }
 }
