@@ -23,9 +23,8 @@ public class UserRegisterTest {
     void weakPassword() {
         stubPasswordChecker.setWeak(true); // 암호가 약하다고 응답하도록 설정
 
-        assertThrows(WeakPasswordException.class, () -> {
-            userRegister.register("id", "pw", "email");
-        });
+        assertThrows(WeakPasswordException.class,
+                () -> userRegister.register("id", "pw", "email"));
     }
 
     @Test

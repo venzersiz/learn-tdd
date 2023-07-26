@@ -27,9 +27,12 @@ public class UserRegisterMockTest {
     @Test
     @DisplayName("약한 암호면 가입 실패")
     void weakPassword() {
+        // Stub 설정
+        // 패스워드가 pw일 때 약한 패스워드라고 가정
         given(mockPasswordChecker.checkPasswordWeak("pw")).willReturn(true);
 
-        assertThrows(WeakPasswordException.class, () -> userRegister.register("id", "pw", "email"));
+        assertThrows(WeakPasswordException.class,
+                () -> userRegister.register("id", "pw", "email"));
     }
 
     @Test
@@ -37,6 +40,7 @@ public class UserRegisterMockTest {
     void checkPassword() {
         userRegister.register("id", "pw", "email");
 
+        // 대역 객체가 기대한 대로 상호작용했는지 확인
         then(mockPasswordChecker).should().checkPasswordWeak(anyString());
     }
 
@@ -45,6 +49,7 @@ public class UserRegisterMockTest {
     void whenRegisterThenSendMail() {
         userRegister.register("id", "pw", "email@email.com");
 
+        // Spy 설정
         ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
         then(mockEmailNotifier).should().sendRegisterEmail(captor.capture());
 
