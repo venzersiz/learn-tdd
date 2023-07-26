@@ -9,10 +9,14 @@ import java.util.stream.Collectors;
 
 public class PaySync {
 
-    private PayInfoDao payInfoDao = new PayInfoDao();
+    private PayInfoDao payInfoDao;
 
-    public void sync() throws IOException {
-        Path path = Paths.get("D:\\data\\pay\\cp0001.csv");
+    public PaySync(PayInfoDao payInfoDao) {
+        this.payInfoDao = payInfoDao;
+    }
+
+    public void sync(String filePath) throws IOException {
+        Path path = Paths.get(filePath);
 
         List<PayInfo> payInfos = Files.lines(path).map(line -> {
             String[] data = line.split(",");

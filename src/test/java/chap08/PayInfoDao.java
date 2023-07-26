@@ -1,7 +1,10 @@
 package chap08;
 
-public class PayInfoDao {
-    public void insert(PayInfo payInfo) {
-        
-    }
+import java.util.List;
+
+public interface PayInfoDao {
+
+    void insert(PayInfo payInfo);
+
+    List<PayInfo> getAll();
 }

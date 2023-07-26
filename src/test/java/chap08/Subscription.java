@@ -4,6 +4,10 @@ import java.time.LocalDate;
 
 public class Subscription {
 
+    public Subscription(LocalDate date, Grade grade) {
+        
+    }
+
     public Object getProductId() {
         return null;
     }

@@ -2,10 +2,9 @@ package chap08;
 
 import java.time.LocalDate;
 
-import static chap08.Grade.GOLD;
-
 public class UserPointCalculator {
 
+    private PointRule pointRule = new PointRule();
     private SubscriptionDao subscriptionDao;
     private ProductDao productDao;
 
@@ -14,21 +13,17 @@ public class UserPointCalculator {
         this.productDao = productDao;
     }
 
+    public void setPointRule(PointRule pointRule) {
+        this.pointRule = pointRule;
+    }
+
     public int calculatePoint(User u) {
         Subscription s = subscriptionDao.selectByUser(u.getId());
         if (s == null) throw new NoSubscriptionException();
 
         Product p = productDao.selectById(s.getProductId());
         LocalDate now = LocalDate.now();
-        int point = 0;
-        if (s.isFinished(now)) {
-            point += p.getDefaultPoint();
-        } else {
-            point += p.getDefaultPoint() + 10;
-        }
-        if (s.getGrade() == GOLD) {
-            point += 100;
-        }
-        return point;
+
+        return pointRule.calculate(s, p, now);
     }
 }
