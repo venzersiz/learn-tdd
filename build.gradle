@@ -22,7 +22,10 @@ dependencies {
 }
 
 test {
-    useJUnitPlatform()
+    useJUnitPlatform {
+        //includeTags "integration"
+        excludeTags "very-slow"
+    }
 
     testLogging {
         events "passed", "skipped", "failed"
